@@ -1,19 +1,24 @@
 pipeline {
     agent any
 
+    tools {
+        // Use the configured Python installation
+        python "Python3"
+    }
+
     stages {
         stage('Install Dependencies') {
             steps {
                 script {
-                    bat 'python -m venv venv'
-                    bat 'venv\\Scripts\\activate && pip install Flask Flask-MongoEngine'
+                    sh 'python -m venv venv'
+                    sh 'source venv/bin/activate && pip install Flask Flask-MongoEngine'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    bat 'venv\\Scripts\\activate && python -m unittest discover tests'
+                    sh 'source venv/bin/activate && python -m unittest discover tests'
                 }
             }
         }
