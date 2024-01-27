@@ -5,17 +5,18 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    sh 'python -m venv venv'
-                    sh 'source venv/bin/activate && pip install Flask Flask-MongoEngine'
+                    bat 'python -m venv venv'
+                    bat 'venv\\Scripts\\activate && pip install Flask Flask-MongoEngine'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    sh 'source venv/bin/activate && python -m unittest discover tests'
+                    bat 'venv\\Scripts\\activate && python -m unittest discover tests'
                 }
             }
         }
     }
 }
+
